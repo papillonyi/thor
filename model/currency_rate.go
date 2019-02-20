@@ -66,6 +66,8 @@ func updateExchangeRate(scur CurrencyType, tcur CurrencyType) {
 }
 
 func UpdateAllExchangeRate() {
+	t := StartTask("UpdateAllExchangeRate")
+	defer t.Finish()
 	var currencyTypes []CurrencyType
 	db.Find(&currencyTypes)
 	db.Select("id, currency_name").Find(&currencyTypes)
@@ -78,9 +80,7 @@ func UpdateAllExchangeRate() {
 				updateExchangeRate(scur, tcur)
 				time.Sleep(2 * time.Second)
 			}
-
 		}
-
 	}
 
 }
