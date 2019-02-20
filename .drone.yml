@@ -1,0 +1,15 @@
+#workspace:
+#  base: /go
+#  path: src/github.com/papillonyi/chitchart
+
+pipeline:
+  build:
+    image: golang
+    commands:
+    - go build -o thor cmd/*
+  publish:
+    image: plugins/docker
+    repo: registry-vpc.cn-shanghai.aliyuncs.com/papillonyispace/thor
+    username: andyi@live.cn
+    password: 123456Y
+    registry: registry-vpc.cn-shanghai.aliyuncs.com

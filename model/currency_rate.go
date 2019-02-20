@@ -3,7 +3,6 @@ package model
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jinzhu/gorm"
 	"net/http"
 	"strconv"
 	"time"
@@ -19,23 +18,8 @@ type CurrencyRate struct {
 	date             time.Time
 }
 
-//type resultType struct {
-//	status	string
-//	scur	string
-//	tcur	string
-//	ratenm	string
-//	rate 	float32
-//	update	time.Time
-//}
-//
-//type financeRateType struct {
-//	success	int
-//	result	resultType
-//}
-
 func getExchangeRate(scur string, tcur string) (float64, time.Time) {
 	info := getFinanceInfo(scur, tcur)
-	//fmt.Println(info)
 	m := info.(map[string]interface{})
 	result := m["result"].(map[string]interface{})
 
@@ -68,7 +52,7 @@ func getFinanceInfo(scur string, tcur string) interface{} {
 	return target
 }
 
-func updateExchangeRate(scur CurrencyType, tcur CurrencyType, db *gorm.DB) {
+func updateExchangeRate(scur CurrencyType, tcur CurrencyType) {
 	fmt.Println(scur.CurrencyName, tcur.CurrencyName)
 	rate, date := getExchangeRate(scur.CurrencyName, tcur.CurrencyName)
 	currencyRate := CurrencyRate{
@@ -81,7 +65,7 @@ func updateExchangeRate(scur CurrencyType, tcur CurrencyType, db *gorm.DB) {
 	db.Create(&currencyRate)
 }
 
-func UpdateAllExchangeRate(db *gorm.DB) {
+func UpdateAllExchangeRate() {
 	var currencyTypes []CurrencyType
 	db.Find(&currencyTypes)
 	db.Select("id, currency_name").Find(&currencyTypes)
@@ -91,7 +75,7 @@ func UpdateAllExchangeRate(db *gorm.DB) {
 		for _, tcur := range currencyTypes {
 			tcurName := tcur.CurrencyName
 			if tcurName != scurName {
-				updateExchangeRate(scur, tcur, db)
+				updateExchangeRate(scur, tcur)
 				time.Sleep(2 * time.Second)
 			}
 
@@ -99,4 +83,10 @@ func UpdateAllExchangeRate(db *gorm.DB) {
 
 	}
 
+}
+
+func GetRateByCurrencyAndDate(scur uint, tcur uint, date time.Time) float64 {
+	var cr CurrencyRate
+	db.Where(&CurrencyRate{SourceCurrencyID: scur, ToCurrencyID: tcur}).First(&cr)
+	return cr.Rate
 }
