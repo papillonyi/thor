@@ -15,4 +15,4 @@ pipeline:
     registry: registry-vpc.cn-shanghai.aliyuncs.com
     tag:
     - latest
-    - $$DRONE_JOB_NUMBER
+    - $DRONE_JOB_NUMBER
