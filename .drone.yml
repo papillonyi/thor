@@ -16,6 +16,7 @@ pipeline:
     tag:
     - latest
     - ${DRONE_BUILD_NUMBER}
+
   deploy:
     image: quay.io/honestbee/drone-kubernetes
     kubernetes_server: https://kubernetes
