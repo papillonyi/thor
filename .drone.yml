@@ -15,11 +15,11 @@ pipeline:
     registry: registry-vpc.cn-shanghai.aliyuncs.com
     tag:
     - latest
-    - ${DRONE_COMMIT}
+    - ${DRONE_BUILD_NUMBER}
   deploy:
     image: quay.io/honestbee/drone-kubernetes
     kubernetes_server: https://kubernetes
     deployment: thor
     repo: registry-vpc.cn-shanghai.aliyuncs.com/papillonyispace/thor
     container: thor
-    tag: ${DRONE_COMMIT}
+    tag: ${DRONE_BUILD_NUMBER}
