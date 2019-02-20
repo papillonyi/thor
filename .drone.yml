@@ -1,6 +1,6 @@
-#workspace:
-#  base: /go
-#  path: src/github.com/papillonyi/chitchart
+workspace:
+  base: /go
+  path: src/github.com/papillonyi/thor
 
 pipeline:
   build:
