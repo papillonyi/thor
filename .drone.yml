@@ -13,3 +13,6 @@ pipeline:
     username: andyi@live.cn
     password: 123456Y
     registry: registry-vpc.cn-shanghai.aliyuncs.com
+    tag:
+    - latest
+    - $$COMMIT
