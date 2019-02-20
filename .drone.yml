@@ -14,4 +14,4 @@ pipeline:
     password: 123456Y
     registry: registry-vpc.cn-shanghai.aliyuncs.com
     tag:
-    - {{ DRONE_JOB_NUMBER }}
+    - ${DRONE_JOB_NUMBER}
