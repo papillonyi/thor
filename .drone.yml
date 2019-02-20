@@ -6,7 +6,7 @@ pipeline:
   build:
     image: golang
     commands:
-    - go build -o thor cmd/*
+    - CGO_ENABLED=0 go build -tags netgo -a -v -o thor cmd/*
   publish:
     image: plugins/docker
     repo: registry-vpc.cn-shanghai.aliyuncs.com/papillonyispace/thor
