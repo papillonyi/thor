@@ -53,6 +53,8 @@ func getFinanceInfo(scur string, tcur string) interface{} {
 }
 
 func updateExchangeRate(scur CurrencyType, tcur CurrencyType) {
+	t := StartTask(fmt.Sprintf("Update %s to %s exchange rate", scur.CurrencyName, tcur.CurrencyName))
+	defer t.Finish()
 	fmt.Println(scur.CurrencyName, tcur.CurrencyName)
 	rate, date := getExchangeRate(scur.CurrencyName, tcur.CurrencyName)
 	currencyRate := CurrencyRate{
@@ -77,8 +79,7 @@ func UpdateAllExchangeRate() {
 		for _, tcur := range currencyTypes {
 			tcurName := tcur.CurrencyName
 			if tcurName != scurName {
-				updateExchangeRate(scur, tcur)
-				time.Sleep(2 * time.Second)
+				go updateExchangeRate(scur, tcur)
 			}
 		}
 	}
