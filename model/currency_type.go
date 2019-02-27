@@ -14,3 +14,9 @@ type CurrencyType struct {
 	BaseMode
 	CurrencyName string `gorm:"unique;not null;size:128"`
 }
+
+func GetAllCurrencyType() []CurrencyType {
+	var vts []CurrencyType
+	db.Find(&vts)
+	return vts
+}

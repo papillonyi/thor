@@ -13,6 +13,7 @@ func Load() {
 		currency.POST("/exchange-rate/update", updateExchangeRate)
 		currency.GET("/test/time", testTime)
 		currency.GET("/scur/:scur/tcur/:tcur", getExchangeRate)
+		currency.GET("/currency-type/", getAllCurrencyType)
 	}
 	router.Run(":8080")
 }

@@ -27,3 +27,9 @@ func getExchangeRate(c *gin.Context) {
 
 	c.String(200, strconv.FormatFloat(rate, 'f', 6, 64))
 }
+
+func getAllCurrencyType(c *gin.Context) {
+	vts := model.GetAllCurrencyType()
+	c.JSON(200, vts)
+
+}
