@@ -1,12 +1,13 @@
 package api
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func Load() {
 	router := gin.Default()
-	router.Use(gin.Recovery())
+	router.Use(gin.Recovery(), cors.Default())
 
 	currency := router.Group("/api/v1/currency")
 	{
