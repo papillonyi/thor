@@ -1,8 +1,9 @@
 FROM busybox
 ADD ./thor /bin/thor
-Add ./conf ./
+RUN mkdir /conf
+ADD ./conf/app.ini /conf/app.ini
 RUN chmod +x /bin/thor
 
 EXPOSE 8080
 
-ENTRYPOINT ["thor"]
+ENTRYPOINT ["cat"]
