@@ -6,4 +6,4 @@ RUN chmod +x /bin/thor
 
 EXPOSE 8080
 
-ENTRYPOINT ["cat"]
+ENTRYPOINT ["thor"]
