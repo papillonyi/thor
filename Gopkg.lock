@@ -66,6 +66,17 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:f146f7834042eb9634b50175d28b403b45d4ecc9fd6e5b5f1fa121039a685da6"
+  name = "github.com/gin-contrib/sessions"
+  packages = [
+    ".",
+    "cookie",
+  ]
+  pruneopts = "UT"
+  revision = "1532893d996f0fedbac1162ea1311ebfb57a3da5"
+
+[[projects]]
+  branch = "master"
   digest = "1:38f00d85208f9f51e51063b0b90687d72f3ad61a7b6135d3ab6cb21e7b68dff2"
   name = "github.com/gin-contrib/sse"
   packages = ["."]
@@ -119,6 +130,30 @@
   pruneopts = "UT"
   revision = "9c11da706d9b7902c6da69c592f75637793fe121"
   version = "v2.0.0"
+
+[[projects]]
+  digest = "1:c79fb010be38a59d657c48c6ba1d003a8aa651fa56b579d959d74573b7dff8e1"
+  name = "github.com/gorilla/context"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "08b5f424b9271eedf6f9f0ce86cb9396ed337a42"
+  version = "v1.1.1"
+
+[[projects]]
+  digest = "1:e72d1ebb8d395cf9f346fd9cbc652e5ae222dd85e0ac842dc57f175abed6d195"
+  name = "github.com/gorilla/securecookie"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "e59506cc896acb7f7bf732d4fdf5e25f7ccd8983"
+  version = "v1.1.1"
+
+[[projects]]
+  digest = "1:e5bf52fd66a2e984b57b4c0f2c4ee024ed749a19886246240629998dc0cf31ce"
+  name = "github.com/gorilla/sessions"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "f57b7e2d29c6211d16ffa52a0998272f75799030"
+  version = "v1.1.3"
 
 [[projects]]
   digest = "1:420ec120a74b22e8a967f2a2928d89503e373848c0d4447d16ddbbbef9a9965c"
@@ -266,6 +301,8 @@
     "github.com/boombuler/barcode/qr",
     "github.com/dgrijalva/jwt-go",
     "github.com/gin-contrib/cors",
+    "github.com/gin-contrib/sessions",
+    "github.com/gin-contrib/sessions/cookie",
     "github.com/gin-gonic/gin",
     "github.com/go-ini/ini",
     "github.com/gomodule/redigo/redis",

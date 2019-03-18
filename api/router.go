@@ -2,6 +2,8 @@ package api
 
 import (
 	"github.com/gin-contrib/cors"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 	"github.com/papillonyi/thor/middleware/jwt"
 	"github.com/papillonyi/thor/pkg/setting"
@@ -9,8 +11,10 @@ import (
 
 func InitRouter() *gin.Engine {
 
+	store := cookie.NewStore([]byte("secret"))
+
 	router := gin.Default()
-	router.Use(gin.Recovery(), cors.Default())
+	router.Use(gin.Recovery(), cors.Default(), sessions.Sessions("mysession", store))
 	gin.SetMode(setting.ServerSetting.RunMode)
 
 	router.GET("/auth", GetAuth)

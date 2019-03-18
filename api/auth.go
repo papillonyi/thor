@@ -2,6 +2,7 @@ package api
 
 import (
 	"github.com/astaxie/beego/validation"
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/papillonyi/thor/internal/auth_service"
 	"github.com/papillonyi/thor/pkg/app"
@@ -51,7 +52,9 @@ func GetAuth(c *gin.Context) {
 		appG.Response(http.StatusInternalServerError, e.ERROR_AUTH_TOKEN, nil)
 		return
 	}
-
+	session := sessions.Default(appG.C)
+	session.Set("token", token)
+	session.Save()
 	appG.Response(http.StatusOK, e.SUCCESS, map[string]string{
 		"token": token,
 	})
