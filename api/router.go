@@ -14,13 +14,17 @@ func InitRouter() *gin.Engine {
 	store := cookie.NewStore([]byte("secret"))
 
 	router := gin.Default()
-	router.Use(gin.Recovery(), cors.Default(), sessions.Sessions("mysession", store))
+
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:3000", "http://http://loki.qijiucao.top/"}
+
+	router.Use(gin.Recovery(), cors.New(config), sessions.Sessions("mysession", store))
 	gin.SetMode(setting.ServerSetting.RunMode)
 
 	router.GET("/auth", GetAuth)
 
 	currency := router.Group("/api/v1/currency")
-	currency.Use(jwt.JWT(), cors.Default())
+	currency.Use(jwt.JWT())
 	{
 		currency.POST("/exchange-rate/update", updateExchangeRate)
 		currency.GET("/test/time", testTime)
