@@ -20,7 +20,7 @@ func InitRouter() *gin.Engine {
 	router.GET("/auth", GetAuth)
 
 	currency := router.Group("/api/v1/currency")
-	currency.Use(jwt.JWT())
+	currency.Use(jwt.JWT(), cors.Default())
 	{
 		currency.POST("/exchange-rate/update", updateExchangeRate)
 		currency.GET("/test/time", testTime)
