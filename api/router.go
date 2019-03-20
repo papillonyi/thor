@@ -16,7 +16,7 @@ func InitRouter() *gin.Engine {
 	router := gin.Default()
 
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:3000", "http://loki.qijiucao.top/"}
+	config.AllowOrigins = []string{"http://localhost:3000", "http://loki.qijiucao.top"}
 	config.AllowCredentials = true
 
 	router.Use(gin.Recovery(), cors.New(config), sessions.Sessions("mysession", store))
