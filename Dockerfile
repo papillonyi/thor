@@ -1,4 +1,5 @@
 FROM busybox
+
 ADD ./thor /bin/thor
 RUN mkdir /conf
 ADD ./conf/app.ini /conf/app.ini

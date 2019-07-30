@@ -20,6 +20,7 @@ func InitRouter() *gin.Engine {
 	config.AllowCredentials = true
 
 	router.Use(gin.Recovery(), cors.New(config), sessions.Sessions("mysession", store))
+
 	gin.SetMode(setting.ServerSetting.RunMode)
 
 	router.GET("/auth", GetAuth)

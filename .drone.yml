@@ -5,6 +5,10 @@ workspace:
 pipeline:
   build:
     image: golang
+    environment:
+    - GO111MODULE: on
+    - GOPROXY: https://goproxy.io
+
     commands:
     - CGO_ENABLED=0 go build -tags netgo -a -v -o thor cmd/*
   publish:
