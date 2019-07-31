@@ -215,6 +215,25 @@
   version = "1.0.1"
 
 [[projects]]
+  branch = "master"
+  digest = "1:163578a7d7476e30d022c97b7fa9d63188ae2fe1039a65b587279a4e404be3ab"
+  name = "github.com/papillonyi/thor"
+  packages = [
+    "api",
+    "internal/auth_service",
+    "middleware/jwt",
+    "model",
+    "pkg/app",
+    "pkg/e",
+    "pkg/file",
+    "pkg/logging",
+    "pkg/setting",
+    "pkg/util",
+  ]
+  pruneopts = "UT"
+  revision = "f3706e112d29d38ec44717f23b6ff6a4d8e6e54f"
+
+[[projects]]
   digest = "1:c47550d71ea17823202a58abc3f635da0a341284342e64fb0d1a95a4cf790301"
   name = "github.com/prometheus/common"
   packages = ["log"]
@@ -308,6 +327,16 @@
     "github.com/gomodule/redigo/redis",
     "github.com/jinzhu/gorm",
     "github.com/jinzhu/gorm/dialects/mysql",
+    "github.com/papillonyi/thor/api",
+    "github.com/papillonyi/thor/internal/auth_service",
+    "github.com/papillonyi/thor/middleware/jwt",
+    "github.com/papillonyi/thor/model",
+    "github.com/papillonyi/thor/pkg/app",
+    "github.com/papillonyi/thor/pkg/e",
+    "github.com/papillonyi/thor/pkg/file",
+    "github.com/papillonyi/thor/pkg/logging",
+    "github.com/papillonyi/thor/pkg/setting",
+    "github.com/papillonyi/thor/pkg/util",
     "github.com/prometheus/common/log",
   ]
   solver-name = "gps-cdcl"

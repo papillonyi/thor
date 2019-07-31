@@ -1,12 +1,14 @@
-language: go
+dist: trusty
 
-go:
-  - 1.9
-
-sudo: required
-
-install:
-  - echo "install"
-
-script:
-  - echo "script"
+jobs:
+  include:
+    - stage: build go bin
+      script:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app  papillonyi/golang:1.11 dep ensure
+        - docker run -it --rm -v "$(pwd)":/tmp/go -w /tmp/go  golang:1.11 CGO_ENABLED=0 go build -tags netgo -a -v -o thor cmd/*
+    - stage: build docker image
+      script:
+        - echo 1234567Y | docker login --username=andyi@live.cn registry.cn-shanghai.aliyuncs.com --password-stdin
+        - docker build -t registry.cn-shanghai.aliyuncs.com/papillonyispace/thor:latest .
+        - docker push registry.cn-shanghai.aliyuncs.com/papillonyispace/thor:latest
