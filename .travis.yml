@@ -6,7 +6,7 @@ jobs:
       script:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app  papillonyi/golang:1.11 dep ensure
-        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app -e CGO_ENABLED=0  golang:1.11 go build -tags netgo -a -v -o thor cmd/*
+        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app -e CGO_ENABLED=0  golang:1.11 go build -tags netgo -a -o thor cmd/*
         - echo 123456Y | docker login --username=andyi@live.cn registry.cn-shanghai.aliyuncs.com --password-stdin
         - docker build -t registry.cn-shanghai.aliyuncs.com/papillonyispace/thor:"$TRAVIS_BUILD_ID" .
         - docker push registry.cn-shanghai.aliyuncs.com/papillonyispace/thor:"$TRAVIS_BUILD_ID"
