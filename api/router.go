@@ -33,6 +33,13 @@ func InitRouter() *gin.Engine {
 		currency.GET("/scur/:scur/tcur/:tcur", getExchangeRate)
 		currency.GET("/currency-type/", getAllCurrencyType)
 	}
+
+	trainer := router.Group("/api/v1/trainer")
+	{
+		trainer.POST("/post", getTrainer)
+		trainer.GET("/get", getTrainer)
+	}
+
 	//router.Run(":8080")
 	return router
 }

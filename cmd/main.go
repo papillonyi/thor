@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/papillonyi/thor/api"
 	"github.com/papillonyi/thor/model"
+	"github.com/papillonyi/thor/mongo"
 	"github.com/papillonyi/thor/pkg/setting"
 	"log"
 	"net/http"
@@ -12,6 +13,7 @@ import (
 func init() {
 	setting.Setup()
 	model.Setup()
+	mongo.Setup()
 
 }
 

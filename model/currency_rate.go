@@ -3,6 +3,7 @@ package model
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/jinzhu/gorm"
 	"net/http"
 	"strconv"
 	"time"
@@ -16,6 +17,11 @@ type CurrencyRate struct {
 	ToCurrencyID     uint
 	Rate             float64
 	date             time.Time
+}
+
+func (c *CurrencyRate) AfterCreate(tx *gorm.DB) (err error) {
+	tx.Model(c).Update("role", "admin")
+	return
 }
 
 func getExchangeRate(scur string, tcur string) (float64, time.Time) {
