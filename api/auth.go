@@ -7,8 +7,8 @@ import (
 	"github.com/papillonyi/thor/internal/auth_service"
 	"github.com/papillonyi/thor/pkg/app"
 	"github.com/papillonyi/thor/pkg/e"
+	"github.com/papillonyi/thor/pkg/logging"
 	"github.com/papillonyi/thor/pkg/util"
-	"github.com/prometheus/common/log"
 	"net/http"
 )
 
@@ -23,8 +23,8 @@ func GetAuth(c *gin.Context) {
 
 	username := c.Query("username")
 	password := c.Query("password")
-	log.Info(username)
-	log.Info(password)
+	logging.Info(username)
+	logging.Info(password)
 
 	a := auth{Username: username, Password: password}
 	ok, _ := valid.Valid(&a)
