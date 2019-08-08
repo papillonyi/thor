@@ -5,13 +5,12 @@ import (
 	"github.com/RichardKnop/machinery/v1/config"
 	"github.com/RichardKnop/machinery/v1/tasks"
 	"log"
-	"time"
 )
 
 var cnf = &config.Config{
-	Broker:        "amqp://guest:guest@localhost:5672/",
+	Broker:        "amqp://admin:root@rabbitmq.qijiucao.top:39053/",
 	DefaultQueue:  "machinery_tasks",
-	ResultBackend: "mongodb://root:root@localhost:27017/",
+	ResultBackend: "mongodb://root:root@thor.qijiucao.top:21026/",
 	MongoDB: &config.MongoDBConfig{
 		Database: "taskresult",
 	},
@@ -32,7 +31,7 @@ func Add(args ...int64) (int64, error) {
 	for _, arg := range args {
 		sum += arg
 	}
-	time.Sleep(10 * time.Second)
+	//time.Sleep(10 * time.Second)
 	return sum, nil
 }
 
