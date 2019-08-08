@@ -9,28 +9,6 @@ import (
 	"log"
 )
 
-//var cnf = &config.Config{
-//	Broker:        fmt.Sprintf("amqp://%s:%s@%s/",
-//		setting.AmqpSetting.User,
-//		setting.AmqpSetting.Password,
-//		setting.AmqpSetting.Host,
-//	),
-//	DefaultQueue:  "machinery_tasks",
-//	ResultBackend: fmt.Sprintf("mongodb://%s:%s@%s/",
-//		setting.MongoSetting.User,
-//		setting.MongoSetting.Password,
-//		setting.MongoSetting.Host,
-//	),
-//	MongoDB: &config.MongoDBConfig{
-//		Database: "taskresult",
-//	},
-//	AMQP: &config.AMQPConfig{
-//		Exchange:     "machinery_exchange",
-//		ExchangeType: "direct",
-//		BindingKey:   "machinery_task",
-//	},
-//}
-
 var (
 	err    error
 	server *machinery.Server
@@ -53,8 +31,8 @@ func Multiply(args ...int64) (int64, error) {
 	return sum, nil
 }
 
-func Setup() {
-	var cnf = &config.Config{
+func getMqCnf() *config.Config {
+	return &config.Config{
 		Broker: fmt.Sprintf("amqp://%s:%s@%s/",
 			setting.AmqpSetting.User,
 			setting.AmqpSetting.Password,
@@ -75,6 +53,10 @@ func Setup() {
 			BindingKey:   "machinery_task",
 		},
 	}
+}
+
+func Setup() {
+	var cnf = getMqCnf()
 
 	server, err = machinery.NewServer(cnf)
 	if err != nil {
@@ -105,14 +87,7 @@ func Setup() {
 				},
 			},
 		}
-
-		//fmt.Println(i)
 		_, err := server.SendTask(signature)
-
-		//taskState := asyncResult.GetState()
-		//fmt.Printf("Current state of %v task is:\n", taskState.TaskUUID)
-		//fmt.Println(taskState.State)
-
 		if err != nil {
 		}
 	}
@@ -120,27 +95,7 @@ func Setup() {
 }
 
 func SetupWork() {
-	var cnf = &config.Config{
-		Broker: fmt.Sprintf("amqp://%s:%s@%s/",
-			setting.AmqpSetting.User,
-			setting.AmqpSetting.Password,
-			setting.AmqpSetting.Host,
-		),
-		DefaultQueue: "machinery_tasks",
-		ResultBackend: fmt.Sprintf("mongodb://%s:%s@%s/",
-			setting.MongoSetting.User,
-			setting.MongoSetting.Password,
-			setting.MongoSetting.Host,
-		),
-		MongoDB: &config.MongoDBConfig{
-			Database: "taskresult",
-		},
-		AMQP: &config.AMQPConfig{
-			Exchange:     "machinery_exchange",
-			ExchangeType: "direct",
-			BindingKey:   "machinery_task",
-		},
-	}
+	var cnf = getMqCnf()
 
 	server, err = machinery.NewServer(cnf)
 	if err != nil {
@@ -156,7 +111,7 @@ func SetupWork() {
 		log.Fatal(err)
 	}
 
-	worker := server.NewWorker("worker_name", 10)
+	worker := server.NewWorker("worker_name", 100)
 	err = worker.Launch()
 	if err != nil {
 		log.Fatal(err)
