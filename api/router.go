@@ -38,6 +38,7 @@ func InitRouter() *gin.Engine {
 	{
 		trainer.POST("/post", getTrainer)
 		trainer.GET("/get", getTrainer)
+		trainer.GET("/gettest", getTest)
 	}
 
 	//router.Run(":8080")

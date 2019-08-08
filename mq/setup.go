@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/RichardKnop/machinery/v1"
 	"github.com/RichardKnop/machinery/v1/config"
-	"github.com/RichardKnop/machinery/v1/tasks"
 	"github.com/papillonyi/thor/pkg/setting"
 	"log"
 )
@@ -19,7 +18,6 @@ func Add(args ...int64) (int64, error) {
 	for _, arg := range args {
 		sum += arg
 	}
-	//time.Sleep(10 * time.Second)
 	return sum, nil
 }
 
@@ -62,35 +60,25 @@ func Setup() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Printf("add server")
 
-	//err = server.RegisterTasks(map[string]interface{}{
-	//	"add":      Add,
-	//	"multiply": Multiply,
-	//})
-	//if err != nil {
-	//	log.Fatal(err)
+	//for i := 1; i <= 100000; i++ {
+	//	signature := &tasks.Signature{
+	//		Name: "add",
+	//		Args: []tasks.Arg{
+	//			{
+	//				Type:  "int64",
+	//				Value: 1,
+	//			},
+	//			{
+	//				Type:  "int64",
+	//				Value: 1,
+	//			},
+	//		},
+	//	}
+	//	_, err := server.SendTask(signature)
+	//	if err != nil {
+	//	}
 	//}
-	log.Printf("add task")
-
-	for i := 1; i <= 100000; i++ {
-		signature := &tasks.Signature{
-			Name: "add",
-			Args: []tasks.Arg{
-				{
-					Type:  "int64",
-					Value: 1,
-				},
-				{
-					Type:  "int64",
-					Value: 1,
-				},
-			},
-		}
-		_, err := server.SendTask(signature)
-		if err != nil {
-		}
-	}
 
 }
 

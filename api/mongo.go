@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/papillonyi/thor/mongo"
+	"github.com/papillonyi/thor/mq"
 )
 
 func getTrainer(c *gin.Context) {
@@ -17,4 +18,11 @@ func getTrainer(c *gin.Context) {
 	}
 	fmt.Println("found: ", name)
 	c.JSON(200, trainer)
+}
+
+func getTest(c *gin.Context) {
+	for i := 1; i <= 1000; i++ {
+		mq.TaskAdd()
+	}
+	c.JSON(200, "done")
 }
