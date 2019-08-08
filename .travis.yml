@@ -6,14 +6,17 @@ jobs:
       script:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app  papillonyi/golang:1.11 dep ensure
+        - rm -rf vendor/github.com/golang/protobuf
+        - cd vendor/github.com/golang/ && git clone https://github.com/golang/protobuf.git
+        - pwd
         - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app  papillonyi/golang:1.11 go install ./vendor/github.com/golang/protobuf/protoc-gen-go/
 
         - echo 123456Y | docker login --username=andyi@live.cn registry.cn-shanghai.aliyuncs.com --password-stdin
 
-        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app -e CGO_ENABLED=0  golang:1.11 go build -tags netgo -a -o app cmd/main.go
+        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app -e CGO_ENABLED=0  papillonyi/golang:1.11 go build -tags netgo -a -o app cmd/main.go
         - docker build -t registry.cn-shanghai.aliyuncs.com/papillonyispace/thor:"$TRAVIS_BUILD_NUMBER" .
         - docker push registry.cn-shanghai.aliyuncs.com/papillonyispace/thor:"$TRAVIS_BUILD_NUMBER"
 
-        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app -e CGO_ENABLED=0  golang:1.11 go build -tags netgo -a -o app cmd/work.go
+        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app -e CGO_ENABLED=0  papillonyi/golang:1.11 go build -tags netgo -a -o app cmd/work.go
         - docker build -t registry.cn-shanghai.aliyuncs.com/papillonyispace/thor_work:"$TRAVIS_BUILD_NUMBER" .
         - docker push registry.cn-shanghai.aliyuncs.com/papillonyispace/thor_work:"$TRAVIS_BUILD_NUMBER"
