@@ -3,6 +3,7 @@ package mongo
 import (
 	"context"
 	"fmt"
+	"github.com/papillonyi/thor/pkg/setting"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
@@ -19,7 +20,12 @@ func Setup() {
 
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 
-	opt := options.Client().ApplyURI("mongodb://root:root@localhost:27017/")
+	opt := options.Client().ApplyURI(fmt.Sprintf("mongodb://%s:%s@%s/",
+		setting.MongoSetting.User,
+		setting.MongoSetting.Password,
+		setting.MongoSetting.Host))
+
+	//opt := options.Client().ApplyURI("mongodb://root:root@localhost:27017/")
 	opt.SetMaxPoolSize(20)
 	client, err = mongo.Connect(ctx, opt)
 

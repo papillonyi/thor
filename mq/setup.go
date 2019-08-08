@@ -1,25 +1,35 @@
 package mq
 
 import (
+	"fmt"
 	"github.com/RichardKnop/machinery/v1"
 	"github.com/RichardKnop/machinery/v1/config"
 	"github.com/RichardKnop/machinery/v1/tasks"
+	"github.com/papillonyi/thor/pkg/setting"
 	"log"
 )
 
-var cnf = &config.Config{
-	Broker:        "amqp://admin:root@rabbitmq.qijiucao.top:39053/",
-	DefaultQueue:  "machinery_tasks",
-	ResultBackend: "mongodb://root:root@thor.qijiucao.top:21026/",
-	MongoDB: &config.MongoDBConfig{
-		Database: "taskresult",
-	},
-	AMQP: &config.AMQPConfig{
-		Exchange:     "machinery_exchange",
-		ExchangeType: "direct",
-		BindingKey:   "machinery_task",
-	},
-}
+//var cnf = &config.Config{
+//	Broker:        fmt.Sprintf("amqp://%s:%s@%s/",
+//		setting.AmqpSetting.User,
+//		setting.AmqpSetting.Password,
+//		setting.AmqpSetting.Host,
+//	),
+//	DefaultQueue:  "machinery_tasks",
+//	ResultBackend: fmt.Sprintf("mongodb://%s:%s@%s/",
+//		setting.MongoSetting.User,
+//		setting.MongoSetting.Password,
+//		setting.MongoSetting.Host,
+//	),
+//	MongoDB: &config.MongoDBConfig{
+//		Database: "taskresult",
+//	},
+//	AMQP: &config.AMQPConfig{
+//		Exchange:     "machinery_exchange",
+//		ExchangeType: "direct",
+//		BindingKey:   "machinery_task",
+//	},
+//}
 
 var (
 	err    error
@@ -44,6 +54,28 @@ func Multiply(args ...int64) (int64, error) {
 }
 
 func Setup() {
+	var cnf = &config.Config{
+		Broker: fmt.Sprintf("amqp://%s:%s@%s/",
+			setting.AmqpSetting.User,
+			setting.AmqpSetting.Password,
+			setting.AmqpSetting.Host,
+		),
+		DefaultQueue: "machinery_tasks",
+		ResultBackend: fmt.Sprintf("mongodb://%s:%s@%s/",
+			setting.MongoSetting.User,
+			setting.MongoSetting.Password,
+			setting.MongoSetting.Host,
+		),
+		MongoDB: &config.MongoDBConfig{
+			Database: "taskresult",
+		},
+		AMQP: &config.AMQPConfig{
+			Exchange:     "machinery_exchange",
+			ExchangeType: "direct",
+			BindingKey:   "machinery_task",
+		},
+	}
+
 	server, err = machinery.NewServer(cnf)
 	if err != nil {
 		log.Fatal(err)
@@ -88,6 +120,28 @@ func Setup() {
 }
 
 func SetupWork() {
+	var cnf = &config.Config{
+		Broker: fmt.Sprintf("amqp://%s:%s@%s/",
+			setting.AmqpSetting.User,
+			setting.AmqpSetting.Password,
+			setting.AmqpSetting.Host,
+		),
+		DefaultQueue: "machinery_tasks",
+		ResultBackend: fmt.Sprintf("mongodb://%s:%s@%s/",
+			setting.MongoSetting.User,
+			setting.MongoSetting.Password,
+			setting.MongoSetting.Host,
+		),
+		MongoDB: &config.MongoDBConfig{
+			Database: "taskresult",
+		},
+		AMQP: &config.AMQPConfig{
+			Exchange:     "machinery_exchange",
+			ExchangeType: "direct",
+			BindingKey:   "machinery_task",
+		},
+	}
+
 	server, err = machinery.NewServer(cnf)
 	if err != nil {
 		log.Fatal(err)

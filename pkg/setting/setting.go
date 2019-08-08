@@ -58,6 +58,22 @@ type Redis struct {
 	IdleTimeout time.Duration
 }
 
+type Mongo struct {
+	User     string
+	Password string
+	Host     string
+}
+
+type Amqp struct {
+	User     string
+	Password string
+	Host     string
+}
+
+var AmqpSetting = &Amqp{}
+
+var MongoSetting = &Mongo{}
+
 var RedisSetting = &Redis{}
 
 var cfg *ini.File
@@ -73,6 +89,8 @@ func Setup() {
 	mapTo("server", ServerSetting)
 	mapTo("database", DatabaseSetting)
 	mapTo("redis", RedisSetting)
+	mapTo("mongo", MongoSetting)
+	mapTo("amqp", AmqpSetting)
 
 	AppSetting.ImageMaxSize = AppSetting.ImageMaxSize * 1024 * 1024
 	ServerSetting.ReadTimeout = ServerSetting.ReadTimeout * time.Second
