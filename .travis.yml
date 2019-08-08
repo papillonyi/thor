@@ -21,3 +21,5 @@ jobs:
         - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app -e CGO_ENABLED=0  papillonyi/golang:1.11 go build -tags netgo -a -o app cmd/work.go
         - docker build -t registry.cn-shanghai.aliyuncs.com/papillonyispace/thor_work:"$TRAVIS_BUILD_NUMBER" .
         - docker push registry.cn-shanghai.aliyuncs.com/papillonyispace/thor_work:"$TRAVIS_BUILD_NUMBER"
+
+        - docker run -it --rm papillonyi/golang:1.11 kubectl set image deployment/thor-work thor-work=registry-vpc.cn-shanghai.aliyuncs.com/papillonyispace/thor_work::"$TRAVIS_BUILD_NUMBER"
