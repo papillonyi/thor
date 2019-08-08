@@ -156,7 +156,7 @@ func SetupWork() {
 		log.Fatal(err)
 	}
 
-	worker := server.NewWorker("worker_name", 5)
+	worker := server.NewWorker("worker_name", 10)
 	err = worker.Launch()
 	if err != nil {
 		log.Fatal(err)
