@@ -1,10 +1,10 @@
 FROM busybox
 
-ADD ./thor /bin/thor
+ADD ./app /bin/app
 RUN mkdir /conf
 ADD ./conf/app.ini /conf/app.ini
-RUN chmod +x /bin/thor
+RUN chmod +x /bin/app
 
 EXPOSE 8080
 
-ENTRYPOINT ["thor"]
+ENTRYPOINT ["app"]
