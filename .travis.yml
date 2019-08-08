@@ -22,4 +22,4 @@ jobs:
         - docker build -t registry.cn-shanghai.aliyuncs.com/papillonyispace/thor_work:"$TRAVIS_BUILD_NUMBER" .
         - docker push registry.cn-shanghai.aliyuncs.com/papillonyispace/thor_work:"$TRAVIS_BUILD_NUMBER"
 
-        - docker run -it --rm papillonyi/golang-dep-kubectl:1.11 kubectl set image deployment/thor-work thor-work=registry-vpc.cn-shanghai.aliyuncs.com/papillonyispace/thor_work::"$TRAVIS_BUILD_NUMBER"
+        - docker run -it --rm papillonyi/golang-dep-kubectl:1.11 kubectl set image deployment/thor-work thor-work=registry-vpc.cn-shanghai.aliyuncs.com/papillonyispace/thor_work:"$TRAVIS_BUILD_NUMBER"
