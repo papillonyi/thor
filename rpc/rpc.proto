@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package rpc;
+
+service Rpc {
+    rpc Add(Point) returns (Sum) {}
+}
+
+message Point {
+    int32 one = 1;
+    int32 two = 2;
+}
+
+message Sum {
+    int32 sum =1;
+}
