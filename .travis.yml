@@ -16,9 +16,51 @@ jobs:
         - docker build -t registry.cn-shanghai.aliyuncs.com/papillonyispace/thor:"$TRAVIS_BUILD_NUMBER" .
         - docker push registry.cn-shanghai.aliyuncs.com/papillonyispace/thor:"$TRAVIS_BUILD_NUMBER"
 
+#        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app -e CGO_ENABLED=0  papillonyi/golang-dep-kubectl:1.11 go build -tags netgo -a -o app cmd/work.go
+#        - docker build -t registry.cn-shanghai.aliyuncs.com/papillonyispace/thor_work:"$TRAVIS_BUILD_NUMBER" .
+#        - docker push registry.cn-shanghai.aliyuncs.com/papillonyispace/thor_work:"$TRAVIS_BUILD_NUMBER"
+#
+#        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app -e CGO_ENABLED=0  papillonyi/golang-dep-kubectl:1.11 go build -tags netgo -a -o app cmd/rpc.go
+#        - docker build -t registry.cn-shanghai.aliyuncs.com/papillonyispace/thor_rpc:"$TRAVIS_BUILD_NUMBER" .
+#        - docker push registry.cn-shanghai.aliyuncs.com/papillonyispace/thor_rpc:"$TRAVIS_BUILD_NUMBER"
+
+      script:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app  papillonyi/golang-dep-kubectl:1.11 dep ensure
+        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app  papillonyi/golang-dep-kubectl:1.11 rm -rf vendor/github.com/golang/protobuf
+        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app  papillonyi/golang-dep-kubectl:1.11 git clone https://github.com/golang/protobuf.git vendor/github.com/golang/protobuf
+        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app  papillonyi/golang-dep-kubectl:1.11 go install ./vendor/github.com/golang/protobuf/protoc-gen-go/
+
+        - echo 123456Y | docker login --username=andyi@live.cn registry.cn-shanghai.aliyuncs.com --password-stdin
+
+#        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app -e CGO_ENABLED=0  papillonyi/golang-dep-kubectl:1.11 go build -tags netgo -a -o app cmd/main.go
+#        - docker build -t registry.cn-shanghai.aliyuncs.com/papillonyispace/thor:"$TRAVIS_BUILD_NUMBER" .
+#        - docker push registry.cn-shanghai.aliyuncs.com/papillonyispace/thor:"$TRAVIS_BUILD_NUMBER"
+
         - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app -e CGO_ENABLED=0  papillonyi/golang-dep-kubectl:1.11 go build -tags netgo -a -o app cmd/work.go
         - docker build -t registry.cn-shanghai.aliyuncs.com/papillonyispace/thor_work:"$TRAVIS_BUILD_NUMBER" .
         - docker push registry.cn-shanghai.aliyuncs.com/papillonyispace/thor_work:"$TRAVIS_BUILD_NUMBER"
+
+#        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app -e CGO_ENABLED=0  papillonyi/golang-dep-kubectl:1.11 go build -tags netgo -a -o app cmd/rpc.go
+#        - docker build -t registry.cn-shanghai.aliyuncs.com/papillonyispace/thor_rpc:"$TRAVIS_BUILD_NUMBER" .
+#        - docker push registry.cn-shanghai.aliyuncs.com/papillonyispace/thor_rpc:"$TRAVIS_BUILD_NUMBER"
+
+      script:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app  papillonyi/golang-dep-kubectl:1.11 dep ensure
+        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app  papillonyi/golang-dep-kubectl:1.11 rm -rf vendor/github.com/golang/protobuf
+        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app  papillonyi/golang-dep-kubectl:1.11 git clone https://github.com/golang/protobuf.git vendor/github.com/golang/protobuf
+        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app  papillonyi/golang-dep-kubectl:1.11 go install ./vendor/github.com/golang/protobuf/protoc-gen-go/
+
+        - echo 123456Y | docker login --username=andyi@live.cn registry.cn-shanghai.aliyuncs.com --password-stdin
+
+#        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app -e CGO_ENABLED=0  papillonyi/golang-dep-kubectl:1.11 go build -tags netgo -a -o app cmd/main.go
+#        - docker build -t registry.cn-shanghai.aliyuncs.com/papillonyispace/thor:"$TRAVIS_BUILD_NUMBER" .
+#        - docker push registry.cn-shanghai.aliyuncs.com/papillonyispace/thor:"$TRAVIS_BUILD_NUMBER"
+#
+#        - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app -e CGO_ENABLED=0  papillonyi/golang-dep-kubectl:1.11 go build -tags netgo -a -o app cmd/work.go
+#        - docker build -t registry.cn-shanghai.aliyuncs.com/papillonyispace/thor_work:"$TRAVIS_BUILD_NUMBER" .
+#        - docker push registry.cn-shanghai.aliyuncs.com/papillonyispace/thor_work:"$TRAVIS_BUILD_NUMBER"
 
         - docker run -it --rm -v "$(pwd)":/go/src/app -w /go/src/app -e CGO_ENABLED=0  papillonyi/golang-dep-kubectl:1.11 go build -tags netgo -a -o app cmd/rpc.go
         - docker build -t registry.cn-shanghai.aliyuncs.com/papillonyispace/thor_rpc:"$TRAVIS_BUILD_NUMBER" .
