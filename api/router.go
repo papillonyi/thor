@@ -41,6 +41,13 @@ func InitRouter() *gin.Engine {
 		trainer.GET("/gettest", getTest)
 	}
 
+	exercise := router.Group("/api/v1/exercise")
+	{
+		exercise.POST("/post", addAction)
+		exercise.GET("/getActions", getActions)
+		exercise.GET("/gettest", getTest)
+	}
+
 	//router.Run(":8080")
 	return router
 }

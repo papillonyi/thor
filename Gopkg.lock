@@ -149,6 +149,22 @@
   revision = "551aad21a6682b95329c1f5bd62ee5060d64f7e8"
 
 [[projects]]
+  digest = "1:bcf36df8d43860bfde913d008301aef27c6e9a303582118a837c4a34c0d18167"
+  name = "github.com/coreos/go-systemd"
+  packages = ["journal"]
+  pruneopts = "UT"
+  revision = "e64a0ec8b42a61e2a9801dc1d0abe539dea79197"
+  version = "v20"
+
+[[projects]]
+  digest = "1:39ff4d4d6baca1ac63c6a03404b761d664be14a71bb5a4aca8fef643d0f66fef"
+  name = "github.com/coreos/pkg"
+  packages = ["capnslog"]
+  pruneopts = "UT"
+  revision = "97fdf19511ea361ae1c100dd393cc47f8dcfa1e1"
+  version = "v4"
+
+[[projects]]
   digest = "1:76dc72490af7174349349838f2fe118996381b31ea83243812a97e5a0fd5ed55"
   name = "github.com/dgrijalva/jwt-go"
   packages = ["."]
@@ -219,6 +235,26 @@
   pruneopts = "UT"
   revision = "2fee6af1a9795aafbe0253a0cfbdf668e1fb8a9a"
   version = "v1.8.0"
+
+[[projects]]
+  digest = "1:877b9eedd8a92d456a213fe85fb8c6d178cb2bc499e86ec5b7f0bcc05d121e54"
+  name = "github.com/gogo/protobuf"
+  packages = [
+    "gogoproto",
+    "proto",
+    "protoc-gen-gogo/descriptor",
+  ]
+  pruneopts = "UT"
+  revision = "0ca988a254f991240804bf9821f3450d87ccbb1b"
+  version = "v1.3.0"
+
+[[projects]]
+  branch = "master"
+  digest = "1:5af2f09cefe2119d47d2bd99d8b68bbe5be93a4754a70ee171d96d9ce32514c1"
+  name = "github.com/goinggo/mapstructure"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "194205d9b4a98eff86d4e8d3c0dfe87dea59ef81"
 
 [[projects]]
   digest = "1:19e1717be26f549febea402e08b46db7919d164324a24ff67e0c81dfb11316b8"
@@ -422,6 +458,33 @@
   revision = "73f8eece6fdcd902c185bf651de50f3828bed5ed"
 
 [[projects]]
+  digest = "1:9ef73cdce2e17137006559db7ebcf6b5d8fe41a8a4d47a0ba48298b55a24d57b"
+  name = "go.etcd.io/etcd"
+  packages = [
+    "auth/authpb",
+    "clientv3",
+    "clientv3/balancer",
+    "clientv3/balancer/connectivity",
+    "clientv3/balancer/picker",
+    "clientv3/balancer/resolver/endpoint",
+    "clientv3/credentials",
+    "etcdserver/api/v3rpc/rpctypes",
+    "etcdserver/etcdserverpb",
+    "mvcc/mvccpb",
+    "pkg/logutil",
+    "pkg/systemd",
+    "pkg/types",
+    "raft",
+    "raft/confchange",
+    "raft/quorum",
+    "raft/raftpb",
+    "raft/tracker",
+  ]
+  pruneopts = "UT"
+  revision = "a14579fbfb1a000439a40abf71862df51b0a2136"
+  version = "v3.4.1"
+
+[[projects]]
   digest = "1:721dfafdcdef689834240d27526505237b230b7dea54df28ec299ab182cfbd1f"
   name = "go.mongodb.org/mongo-driver"
   packages = [
@@ -485,6 +548,37 @@
   pruneopts = "UT"
   revision = "9c377598961b706d1542bd2d84d538b5094d596e"
   version = "v0.22.0"
+
+[[projects]]
+  digest = "1:a5158647b553c61877aa9ae74f4015000294e47981e6b8b07525edcbb0747c81"
+  name = "go.uber.org/atomic"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "df976f2515e274675050de7b3f42545de80594fd"
+  version = "v1.4.0"
+
+[[projects]]
+  digest = "1:60bf2a5e347af463c42ed31a493d817f8a72f102543060ed992754e689805d1a"
+  name = "go.uber.org/multierr"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "3c4937480c32f4c13a875a1829af76c98ca3d40a"
+  version = "v1.1.0"
+
+[[projects]]
+  digest = "1:676160e6a4722b08e0e26b11521d575c2cb2b6f0c679e1ee6178c5d8dee51e5e"
+  name = "go.uber.org/zap"
+  packages = [
+    ".",
+    "buffer",
+    "internal/bufferpool",
+    "internal/color",
+    "internal/exit",
+    "zapcore",
+  ]
+  pruneopts = "UT"
+  revision = "27376062155ad36be76b0f12cf1572a221d3a48c"
+  version = "v1.10.0"
 
 [[projects]]
   branch = "master"
@@ -698,6 +792,7 @@
   analyzer-version = 1
   input-imports = [
     "github.com/RichardKnop/machinery/v1",
+    "github.com/RichardKnop/machinery/v1/backends/result",
     "github.com/RichardKnop/machinery/v1/config",
     "github.com/RichardKnop/machinery/v1/tasks",
     "github.com/Unknwon/com",
@@ -710,12 +805,18 @@
     "github.com/gin-contrib/sessions/cookie",
     "github.com/gin-gonic/gin",
     "github.com/go-ini/ini",
+    "github.com/goinggo/mapstructure",
+    "github.com/golang/protobuf/proto",
     "github.com/gomodule/redigo/redis",
     "github.com/jinzhu/gorm",
     "github.com/jinzhu/gorm/dialects/mysql",
+    "go.etcd.io/etcd/clientv3",
+    "go.etcd.io/etcd/etcdserver/api/v3rpc/rpctypes",
     "go.mongodb.org/mongo-driver/bson",
     "go.mongodb.org/mongo-driver/mongo",
     "go.mongodb.org/mongo-driver/mongo/options",
+    "golang.org/x/net/context",
+    "google.golang.org/grpc",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
